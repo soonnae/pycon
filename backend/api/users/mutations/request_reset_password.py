@@ -41,7 +41,7 @@ def request_reset_password(email: str) -> RequestResetPasswordResult:
         },
     )
 
-    logger.info("Sent reset password token to user_id=%s", user.id)
+    logger.info("Sent reset password token to a user.")
     return OperationSuccess(ok=True)
 
 

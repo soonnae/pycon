@@ -28,7 +28,7 @@ def renew_lock(lock, interval, _stop_event, extend_time):
 def make_lock_id(func, *args, **kwargs):
     key = f"celery_lock_{func.__module__}_{func.__name__}"
 
-    hash = hashlib.md5()
+    hash = hashlib.sha256()  # Updated to use SHA256
     for arg in args:
         if not isinstance(arg, str):
             arg = str(arg)

@@ -50,7 +50,7 @@ def astro_proxy(request, path):
         status_forcelist=(500, 502, 504),
     )
     adapter = HTTPAdapter(max_retries=retry)
-    session.mount("http://", adapter)
+    session.mount("https://", adapter)  # Changed from "http://" to "https://"
     session.mount("https://", adapter)
 
     response = session.request(request.method, url, **requests_args)

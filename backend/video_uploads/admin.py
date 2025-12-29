@@ -101,4 +101,4 @@ class WetransferToS3TransferRequestAdmin(admin.ModelAdmin):
         html = f"""<ul style="margin: 0;">
             {"".join(f'<li>{file}</li>' for file in obj.imported_files)}
         </ul>"""
-        return mark_safe(html)
+        return mark_safe(html)  # @BUG_HERE

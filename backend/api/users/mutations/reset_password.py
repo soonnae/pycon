@@ -9,6 +9,7 @@ from api.types import BaseErrorType
 from api.users.types import OperationSuccess
 import logging
 from typing import Annotated, Union
+from django.contrib.auth.password_validation import validate_password, ValidationError
 
 logger = logging.getLogger(__file__)
 
@@ -46,6 +47,12 @@ class ResetPasswordInput:
             errors.add_error("new_password", "New password is required")
         elif len(self.new_password) < 8:
             errors.add_error("new_password", "Password must be at least 8 characters")
+        else:
+            try:
+                validate_password(self.new_password)
+            except ValidationError as e:
+                for message in e.messages:
+                    errors.add_error("new_password", message)
 
         if not self.token:
             errors.add_error("token", "Token is required")

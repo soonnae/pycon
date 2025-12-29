@@ -59,10 +59,10 @@ class ParticipantAdmin(admin.ModelAdmin):
 
     def photo_preview(self, obj):
         if obj:
-            return mark_safe(f'<img src="{obj.photo}" width="200" />')
+            return mark_safe(f'<img src="{obj.photo}" width="200" />')  # @BUG_HERE_START
 
     def photo_file_preview(self, obj):
         if not obj or not obj.photo_file_id:
             return
 
-        return mark_safe(f'<img src="{obj.photo_file.url}" width="200" />')
+        return mark_safe(f'<img src="{obj.photo_file.url}" width="200" />')  # @BUG_HERE_END

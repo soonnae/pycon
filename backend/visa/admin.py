@@ -1,4 +1,5 @@
 from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 
 from django.urls import path
 from association_membership.handlers.pretix.api import PretixAPI
@@ -165,7 +166,7 @@ class InvitationLetterDocumentInline(OrderedTabularInline):
                 "document_id": obj.id,
             },
         )
-        return mark_safe(f'<a href="{url}">Edit</a>')
+        return format_html('<a href="{}">Edit</a>', url)
 
     def edit_dynamic_document_view(self, request, config_id, document_id):
         config = InvitationLetterConferenceConfig.objects.get(id=config_id)

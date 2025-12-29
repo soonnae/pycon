@@ -4,7 +4,7 @@ from functools import cached_property
 from django.utils.safestring import mark_safe
 from notifications.template_utils import render_template_from_string
 from django.template.loader import render_to_string
-from django.utils.html import strip_tags
+from django.utils.html import strip_tags, format_html
 
 if TYPE_CHECKING:
     from notifications.models import EmailTemplate
@@ -55,8 +55,7 @@ class RenderedEmailTemplate:
         return strip_tags(self.body)
 
     def render_text(self, text: str) -> str:
-        return mark_safe(
-            render_template_from_string(
-                text, self.all_placeholders, show_placeholders=self.show_placeholders
-            )
+        rendered_content = render_template_from_string(
+            text, self.all_placeholders, show_placeholders=self.show_placeholders
         )
+        return format_html("{}", rendered_content)

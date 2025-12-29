@@ -79,7 +79,7 @@ class UserReviewAdmin(admin.ModelAdmin):
                 "review_item_id": obj.object_id,
             },
         )
-        return mark_safe(f'<a href="{url}">Edit your vote</a>')
+        return mark_safe(f'<a href="{url}">Edit your vote</a>')  # @BUG_HERE_START
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -189,7 +189,7 @@ class ReviewSessionAdmin(ConferencePermissionMixin, admin.ModelAdmin):
         Go to recap screen
     </a>
 """
-        )
+        )  # @BUG_HERE_END
 
     def get_urls(self):
         return [

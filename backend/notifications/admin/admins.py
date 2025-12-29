@@ -11,7 +11,7 @@ from notifications.admin.views import (
 )
 from users.admin_mixins import ConferencePermissionMixin
 from django.urls import path
-from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 
 from notifications.models import EmailTemplate, SentEmail, SentEmailEvent
 from django.forms import Textarea
@@ -81,12 +81,12 @@ class EmailTemplateAdmin(ConferencePermissionMixin, admin.ModelAdmin):
         return self._response_post_save(request, obj)
 
     def save_and_preview(self, obj):
-        return mark_safe(
+        return format_html(
             '<input type="submit" name="_save_and_preview" value="Save and preview" />'
         )
 
     def placeholders_available(self, obj):
-        return mark_safe(
+        return format_html(
             "<br>".join(
                 [
                     "{{" + placeholder + "}}"

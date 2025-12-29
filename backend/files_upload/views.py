@@ -5,7 +5,6 @@ from django.conf import settings
 from files_upload.models import File
 
 
-@csrf_exempt
 def local_file_upload(request, file_id):
     if not settings.DEBUG:
         return HttpResponse(status=400)

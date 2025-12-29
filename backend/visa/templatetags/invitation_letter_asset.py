@@ -1,5 +1,5 @@
 from django import template
-from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 
 register = template.Library()
 
@@ -24,6 +24,8 @@ def invitation_letter_asset(context, identifier: str, **kwargs):
         style_props["height"] = height
 
     style_props_as_str = ";".join([f"{k}: {v}" for k, v in style_props.items()])
-    return mark_safe(
-        f'<img src="{matching_asset.image.url}" style="{style_props_as_str}" />'
+    return format_html(
+        '<img src="{}" style="{}" />',
+        matching_asset.image.url,
+        style_props_as_str
     )

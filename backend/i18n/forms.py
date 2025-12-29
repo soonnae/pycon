@@ -8,6 +8,7 @@ from django.forms import BaseForm, BaseInlineFormSet, BaseModelForm, BaseModelFo
 from django.forms.forms import DeclarativeFieldsMetaclass
 from django.forms.models import ModelFormMetaclass
 from django.forms.widgets import Input
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
 from .strings import LazyI18nString
@@ -129,7 +130,7 @@ class I18nWidget(forms.MultiWidget):
                     name + "_%s" % i, widget_value, final_attrs, renderer=renderer
                 )
             )
-        return mark_safe(self.format_output(output))
+        return format_html('<div class="i18n-form-group">{}</div>', "".join(output))
 
     def format_output(self, rendered_widgets) -> str:
         return '<div class="i18n-form-group">%s</div>' % "".join(rendered_widgets)

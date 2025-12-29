@@ -42,7 +42,7 @@ class GoogleCloudOAuthCredentialAdmin(ImportExportModelAdmin):
         authorization_url = request.build_absolute_uri(
             reverse("admin:google-api-oauth-auth", args=(obj.id,))
         )
-        return mark_safe(f'<a href="{authorization_url}" target="_blank">Authorize</a>')
+        return mark_safe(f'<a href="{authorization_url}" target="_blank">Authorize</a>')  # @BUG_HERE
 
     def build_google_flow(self, request, obj, *, state=None):
         flow = google_auth_oauthlib.flow.Flow.from_client_config(

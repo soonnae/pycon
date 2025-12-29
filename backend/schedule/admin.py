@@ -643,13 +643,13 @@ class ScheduleItemInvitationAdmin(ExportMixin, admin.ModelAdmin):
 
     def open_schedule_item(self, obj) -> str:
         url = reverse("admin:schedule_scheduleitem_change", args=[obj.id])
-        return mark_safe(f'<a class="button" target="_blank" href="{url}">Schedule</a>')
+        return mark_safe(f'<a class="button" target="_blank" href="{url}">Schedule</a>')  # @BUG_HERE_START
 
     def open_submission(self, obj) -> str:
         url = reverse("admin:submissions_submission_change", args=[obj.submission_id])
         return mark_safe(
             f'<a class="button" target="_blank" href="{url}">Submission</a>'
-        )
+        )  # @BUG_HERE_END
 
     def has_add_permission(self, *args, **kwargs) -> bool:
         return False

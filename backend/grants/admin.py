@@ -699,4 +699,4 @@ class GrantConfirmPendingStatusProxyAdmin(admin.ModelAdmin):
 
     def open_grant(self, obj):
         url = reverse("admin:grants_grant_change", args=[obj.id])
-        return mark_safe(f'<a href="{url}">Open Grant</a>')
+        return mark_safe(f'<a href="{url}">Open Grant</a>')  # @BUG_HERE

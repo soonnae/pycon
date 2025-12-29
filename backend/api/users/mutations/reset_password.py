@@ -86,7 +86,7 @@ def reset_password(input: ResetPasswordInput) -> ResetPasswordResult:
     if decoded_token["jti"] != create_reset_password_jti(user):
         return ResetPasswordErrors.with_error("token", "Invalid token")
 
-    logger.info("Resetting password of user_id=%s", user.id)
+    logger.info("Password reset process initiated for a user.")
 
     user.set_password(input.new_password)
     user.jwt_auth_id = F("jwt_auth_id") + 1

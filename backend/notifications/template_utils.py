@@ -1,4 +1,4 @@
-from jinja2 import Environment, Undefined
+from jinja2 import Environment, Undefined, select_autoescape
 
 
 class ShowPlaceholdersUndefined(Undefined):
@@ -16,6 +16,7 @@ def render_template_from_string(
     env = Environment(
         trim_blocks=True,
         lstrip_blocks=True,
+        autoescape=select_autoescape(['html', 'xml'])
     )
 
     if show_placeholders:
